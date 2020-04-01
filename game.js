@@ -5,11 +5,10 @@ import { getClue as getClueFromAsyncFunction } from "./async-await-version.js";
 let score = 0;
 
 function updateHTMLfromClue (clue) {
-    
-    document.getElementById("question").innerHTML = clue.question;
-    document.getElementById("answer").innerHTML = `The correct answer is: ${clue.answer}`;
+    document.getElementById("question").innerHTML = `Question is: ${clue.question}`;
+    document.getElementById("answer").innerHTML = clue.answer;
     document.getElementById("value").innerHTML = clue.value;
-    document.getElementById("category-title").innerHTML = clue.category.title;
+    document.getElementById("category-title").innerHTML = `Category is: ${clue.category.title}`;
     let isValid = "valid"
     if(clue.invalid_count > 0) {
         isValid = "invalid";
@@ -23,9 +22,7 @@ function updateHTMLfromClue (clue) {
         .querySelector(".pure-form")
         .reset();
 
-    document
-        .getElementById("check-response")
-        .classList.add('is-hidden')
+    
     
 }    
 
@@ -40,6 +37,9 @@ window.addEventListener("DOMContentLoaded", () => {
             updateHTMLfromClue(clue);
 
         });
+        document
+        .getElementById("answer")
+        .classList.add('is-hidden')
     });
 
     document
@@ -49,6 +49,10 @@ window.addEventListener("DOMContentLoaded", () => {
         getClueFromPromise()
             .then( clue => updateHTMLfromClue(clue)) 
             .catch( err => console.log(err));
+
+            document
+            .getElementById("answer")
+            .classList.add('is-hidden')
             
     });
 
@@ -63,6 +67,10 @@ window.addEventListener("DOMContentLoaded", () => {
         } catch (err) {
             console.log(err);
         }
+
+        document
+        .getElementById("answer")
+        .classList.add('is-hidden')
     
     });
 
@@ -70,20 +78,21 @@ window.addEventListener("DOMContentLoaded", () => {
         .getElementById('player-response')
         .addEventListener('keyup', () => {
         document.getElementById("check-response")
-        .classList.remove('is-hidden')
+        .disabled= false;
     })
 
     document
         .getElementById("check-response")
         .addEventListener("click", async event => { 
 
-        const textResponse = document.getElementById("player-response").value.toLowerCase();
-        const answer = document.getElementById('answer').innerHTML.toLocaleLowerCase();
+        const textResponse = document.getElementById("player-response").value.toLowerCase().trim();
+        const answer = document.getElementById('answer').innerHTML.toLowerCase().trim();
         const getValue = document.getElementById('value').innerHTML;
         let value = Number.parseInt(getValue)
         const scoreLocation = document.getElementById('score');
-
-        if(textResponse === answer) {
+          
+    
+        if(textResponse == answer) {
             score += value;
             scoreLocation.innerHTML = `Score: ${score}`; 
         } else {
@@ -91,8 +100,16 @@ window.addEventListener("DOMContentLoaded", () => {
             scoreLocation.innerHTML = `Score: ${score}`; 
         }
 
-        document.getElementById("answer")
-        .classList.remove('is-hidden')
+            document.getElementById("answer")
+                .classList.remove('is-hidden')
+
+            document.getElementById("check-response")
+                .disabled= true;
+
     
     });
+    
+    
+    
+    
 });

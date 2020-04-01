@@ -15,5 +15,3 @@ export function getClue (cb) {
     xhr.open("GET", "https://jservice.xyz/api/random-clue");
     xhr.send();
 }
-
-

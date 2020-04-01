@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"></link>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"></link> 
     <link rel="stylesheet" href="game.css"></link>
     <title>Trivia Game</title>
     <script type="module" src="game.js"></script>
@@ -19,13 +19,13 @@
             <div id="score"></div>
             <div id="category-title"></div>
             <div id="question"></div>
-            <div id="value">Score: 0</div>
+            <div id="value"></div>
             <div id="invalid-count" class="is-hidden"></div>
             <form class="pure-form">
-                <textarea id="player-response" class="pure-input-1"></textarea>
+                <textarea id="player-response" class="pure-input-1" spellcheck="true"></textarea>
             </form>
-            <button id="check-response" class="pure-button, is-hidden">Check response</button>
-            <div id="answer" class="is-hidden"></div>
+            <button id="check-response" class="pure-button" disabled=true>Check response</button>
+            <div id="answer" ></div>
         </div>
     </main>
     
