@@ -1,6 +1,6 @@
 import { getClue as getClueFromCallback } from "./callback-version.js";
 import { getClue as getClueFromPromise } from "./promise-version.js";
-
+import { getClue as getClueFromAsyncFunction } from "./async-await-version.js";
 
 function updateHTMLfromClue (clue) {
     
@@ -15,11 +15,10 @@ function updateHTMLfromClue (clue) {
         isValid = "valid";
     }
     document.getElementById("invalid-count").innerHTML = isValid;    
+
+    document    
+        .getElementById()
 }    
-
-
-
-
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -27,12 +26,10 @@ window.addEventListener("DOMContentLoaded", () => {
         .getElementById("use-callback")
         .addEventListener("click", event => {
 
-            getClueFromCallback((err, clue) => {
-                if(err !== null) return console.error(err);
-                updateHTMLfromClue(clue);
-            });
-
-
+        getClueFromCallback((err, clue) => {
+            if(err !== null) return console.error(err);
+            updateHTMLfromClue(clue);
+        });
     });
 
     document
@@ -42,10 +39,22 @@ window.addEventListener("DOMContentLoaded", () => {
         getClueFromPromise()
             .then( clue => updateHTMLfromClue(clue)) 
             .catch( err => console.log(err));
-       
-    });
+        });
 
+    
 
+    document
+        .getElementById("use-async-await")
+        .addEventListener("click", async event => {   
+            try {
+            const clue = await getClueFromAsyncFunction();
+            updateHTMLfromClue(clue);
+            } catch (err) {
+                console.log(err);
+            }
+        });
+
+    
 
 
 });
