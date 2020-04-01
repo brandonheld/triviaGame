@@ -1,6 +1,8 @@
 body {
     background-color: #DFDFDF;
+    padding: 15px;
 }
+
 
 #game-board {
     margin:auto;
@@ -23,6 +25,10 @@ body {
 #category-title, #invalid-count {
     font-size: 1em;
     margin: 1.25em 0;
+}
+
+.is-hidden {
+    display: none;
 }
 
 
